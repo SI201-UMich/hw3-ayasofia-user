@@ -1,12 +1,13 @@
-# Name:
-# Student ID:
-# Email:
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Name: Sofia Ayala
+# Student ID: 03098022
+# Email: ayasofia@umich.edu
+# Who or what you worked with on this homework (including generative AI like ChatGPT): I worked with Clare Mathison
 # If you worked with generative AI also add a statement for how you used it.
-# e.g.:
+# e.g.: 
 # Asked ChatGPT hints for debugging and suggesting the general structure of the code
+# I used ChatGPT to helpme figure out how to correctly commit and push, as well as how to be able to run my code in the terminal where I can type in the input.
 # Did your use of GenAI on this assignment align with your goals and guidelines in 
-#    your Gen AI contract? If not, why?
+#    your Gen AI contract? If not, why? Yes
 
 import random
 import io
@@ -73,7 +74,7 @@ class CouponDispenser:
             name_index = self.customer_roster.index(name)
             coupon_index = self.issued_indices[name_index]
             coupon = self.coupon_cards[coupon_index]
-            return f"The name already has a coupon: {coupon}"
+            return f"That name already has a coupon: {coupon}"
         else:
             coupon_index = random.randint(0, len(self.coupon_cards) - 1)
             self.customer_roster.append(name)
@@ -101,14 +102,14 @@ class CouponDispenser:
         # TODO: Implement per instructions 
         round_number = 1
         while True:
-            user_input = input(f"Round {round_number} - Enter a name (or comma-separated list), or type 'show' or 'exit': ")
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
             if user_input == 'exit':
                 print("Goodbye!")
                 break
             elif user_input == "show":
                 for i in range(len(self.customer_roster)):
                     coupon_card_index = self.issued_indices[i]
-                    print(f"{self.customer_roster[i]}: {self.coupon_card[coupon_card_index]}")
+                    print(f"{self.customer_roster[i]}: {self.coupon_cards[coupon_card_index]}")
             else:
                 pieces = user_input.split(",")
                 for piece in pieces:
@@ -142,22 +143,16 @@ class CouponDispenser:
             return
         else:
             new_lst = []
-            for i in range(len(self.issued_indices)):
+            for i in range(len(self.coupon_cards)):
                 new_lst.append(0)
             for val in self.issued_indices:
                 new_lst[val] += 1
             for i in range(len(self.coupon_cards)):
-                print(f"{self.coupon_cards[i]}: {new_lst[i]}")
+                print(f"{self.coupon_cards[i]} distribution count: {new_lst[i]}.")
+            return
 
 
 def main():
-    """
-    Driver function:
-      - Define the coupon_cards list (example coupons below)
-      - Create a CouponDispenser
-      - Start the interaction via distribute_session()
-      - After exit, call tally_distribution() to print the distribution in the terminal
-    """
     coupon_cards = [
         "10% off",
         "Free small coffee",
@@ -169,6 +164,7 @@ def main():
     box = CouponDispenser(coupon_cards)
     box.distribute_session()
     box.tally_distribution()
+    test()
 
 
 # -----------------------
